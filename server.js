@@ -1,27 +1,21 @@
 const http = require('http')
 const fs = require('fs')
 const WebSocketServer = require('websocket').server
-const mysql = require('mysql')
+var { Client } = require('pg');
 
 //Port number
 const PORT = 3000
 
-//mysql
-const sqlConnection = mysql.createConnection({
-    host: "localhost",
-    user: "school",
-    password: "JXrU!@GKv/OPnAMv",
-    database: "school" 
+//db
+var client = new Client({
+    user: 'school',
+    host: 'dpg-cigqkjlgkuvojjau7h6g-a',
+    database: 'school_kppl',
+    password: 'EWX77urKq0TWn1SGP8S4aunbZAnaM4t6',
+    port: 5432
 })
-
-sqlConnection.connect((err) => {
-    if(err) {
-        console.log(`Mysql connection error: ${err.stack}`);
-        return
-    }
-
-    console.log("Mysql connection success")
-})
+ 
+client.connect()
 
 const server = http.createServer();
 
